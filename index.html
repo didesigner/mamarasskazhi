@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#121a31" />
+  <title>Мама, расскажи — оживи книгу</title>
+
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- AR-библиотеки. GitHub Pages загружает их из CDN. -->
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+  <script src="./books.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <main id="app">
+    <section id="homeScreen" class="screen welcome">
+      <div class="brand">Мама, расскажи</div>
+
+      <div class="sparkles" aria-hidden="true">
+        <span>✦</span><span>✧</span><span>·</span><span>✦</span><span>·</span>
+      </div>
+
+      <div class="card">
+        <div class="magic">✦</div>
+        <h1>Оживи книгу</h1>
+        <p class="lead">Выбери книгу или открой её по QR-коду.</p>
+        <div id="bookList" class="book-list"></div>
+        <p class="tiny">Камера включается только после нажатия кнопки.</p>
+      </div>
+    </section>
+
+    <section id="introScreen" class="screen welcome hidden">
+      <div class="brand">Мама, расскажи</div>
+      <div class="card">
+        <div class="magic">✦</div>
+        <h1 id="bookTitle">Оживи страницу</h1>
+        <p id="bookHint" class="lead">
+          Нажми кнопку, разреши доступ к камере и наведи телефон на страницу со значком ✦.
+        </p>
+        <button id="startButton" class="primary">Открыть камеру</button>
+        <button id="backButton" class="ghost">← К выбору книги</button>
+        <p class="tiny">Для камеры сайт должен быть открыт через HTTPS.</p>
+      </div>
+    </section>
+
+    <section id="arScreen" class="screen ar-screen hidden">
+      <div id="arMount" class="ar-mount"></div>
+
+      <div class="ar-ui">
+        <div class="topbar">
+          <button id="closeButton" class="round" aria-label="Закрыть">×</button>
+          <div id="arTitle" class="pill">Оживи страницу</div>
+        </div>
+
+        <div class="finder" aria-hidden="true">
+          <span class="c tl"></span><span class="c tr"></span>
+          <span class="c bl"></span><span class="c br"></span>
+        </div>
+
+        <div class="bottom">
+          <div id="statusText" class="status">Наведи камеру на страницу книги</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="errorScreen" class="screen welcome hidden">
+      <div class="card">
+        <div class="magic">!</div>
+        <h1>Не получилось</h1>
+        <p id="errorText" class="lead"></p>
+        <button id="retryButton" class="primary">Попробовать ещё раз</button>
+        <button id="errorHomeButton" class="ghost">К выбору книги</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
